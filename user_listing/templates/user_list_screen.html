@@ -19,7 +19,93 @@
 {% include "navbar.html" %}
 
   <div class="container">
-    <h2>User Listing</h2>
+    <h2>User List</h2>
+
+
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+   
+        </button>
+      </div>
+      <div class="modal-body" id="modal_content">
+
+
+<div class="col-lg-12 mb-4 mb-sm-5">
+                <div class="card card-style1 border-0">
+                    <div class="card-body p-1-9 p-sm-2-3 p-md-6 p-lg-7">
+                        <div class="row align-items-center">
+                            <div class="col-lg-4 mb-4 mb-lg-0">
+                                <img id="m_picture_src" src="" alt="...">
+                            </div>
+                            <div class="col-lg-6 px-xl-10">
+                                <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <h3 id="m_full_name" class="h3 text-white mb-0">Name</h3>
+                                    <span id="m_id" class="text-primary">ID</span>
+                                </div>
+                                <ul class="list-unstyled mb-1-9">
+                                    <li id="m_gender" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> vGender</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> 10 Years</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> edith@mail.com</li>
+                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Website:</span> www.example.com</li>
+                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 507 - 541 - 4567</li>
+                                </ul>
+                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
+                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
+                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
+                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
+                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+    
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+
+
+function get_user_info(userid){
+  url = 'single_user_info/'+userid
+  console.log(url)
+  fetch(url).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  console.log(data['first_name']);
+
+document.getElementById("m_full_name").innerHTML = data['first_name'] + data['last_name']
+document.getElementById("m_id").innerHTML = "ID: "+data['username']
+document.getElementById("m_picture_src").src=data['picture']
+document.getElementById("m_gender").innerHTML = "Gender: "+data['gender'].charAt(0).toUpperCase() + data['gender'].slice(1);
+
+
+
+}).catch(function() {
+  console.log("fail");
+});
+}
+
+
+</script>
 
 <div>
 <table class="table table-bordered">
@@ -33,9 +119,9 @@
   <tbody>
     {% for user in users %}
       <tr>
-        <td>{{ user.username }}</td>
-        <td>{{ user.first_name }}</td>
-        <td>{{ user.last_name }}</td>
+        <td><a href='#' onclick="get_user_info('{{user.username}}');return false;" data-toggle="modal" data-target="#exampleModal">{{ user.username }}</a></td>
+        <td><a href='#' onclick="get_user_info('{{user.username}}');return false;" data-toggle="modal" data-target="#exampleModal">{{ user.first_name }}</a></td>
+        <td><a href='#' onclick="get_user_info('{{user.username}}');return false;" data-toggle="modal" data-target="#exampleModal">{{ user.last_name }}</a></td>
       </tr>
     {% endfor %}
   </tbody>
@@ -63,10 +149,6 @@
 </div>
          {% if users.has_other_pages %}
          
-
-
-
-
 
 <ul class="pagination">
 {% if users.has_previous %}
@@ -106,6 +188,7 @@
 
 
   </div>
+
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>    

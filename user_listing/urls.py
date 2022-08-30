@@ -11,6 +11,7 @@ urlpatterns = [
     path('clear_database_api', login_required(views.clear_database_api), name='clear_database_api'),
     path('search_users_screen', login_required(views.search_users_screen), name='search_users_screen'),
     path('get_filtered_data_api', login_required(views.get_filtered_data_api), name='get_filtered_data_api'),
+    path('single_user_info/<str:userid>/', login_required(views.single_user_info), name='single_user_info'),
     
 
 

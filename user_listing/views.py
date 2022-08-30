@@ -7,6 +7,7 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.contrib import messages
 from django.core import serializers
+from itertools import chain
 
 # Create your views here.
 
@@ -28,6 +29,31 @@ def get_filtered_data_api(request):
 		user_list = m_usernames.objects.filter(first_name__contains=vFirstName , last_name__contains=vLastName, username__contains=vUsername)[0:100]
 	qs_json = serializers.serialize('json', user_list)
 	return HttpResponse(qs_json, content_type='application/json')
+
+def single_user_info(request,userid):
+	result = {}
+	qs = m_usernames.objects.filter(username=userid)
+	for item in qs:
+		result['first_name'] = item.first_name
+		result['last_name'] = item.last_name
+		result['username'] = item.username 
+		result['gender'] = item.gender
+		result['id_type'] = item.id_type
+		result['id_value'] = item.id_value
+	qs = m_userdetails.objects.filter(username=userid)
+	for item in qs:
+		result['email'] = item.email
+		result['location_city'] = item.location_city
+		result['location_state'] = item.location_state
+		result['loation_country'] = item.loation_country
+		result['location_postcode'] = item.location_postcode
+		result['dob'] = item.dob
+		result['registered_date'] = item.registered_date
+		result['phone'] = item.phone
+		result['cell'] = item.cell
+		result['picture'] = item.picture
+		result['nat'] = item.nat
+	return HttpResponse(json.dumps(result), content_type='application/json')
 
 
 
@@ -62,6 +88,7 @@ def all_user_list_screen(request):
 		users = paginator.page(paginator.num_pages)
 
 	return render(request, 'user_list_screen.html', { 'users': users,'pagerecords':pagerecords, 'total_users':paginator.count})
+
 
 
 def fetch_random_data_screen(request):
