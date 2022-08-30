@@ -24,9 +24,9 @@ def get_filtered_data_api(request):
 	vLastName = request.GET.get('last_name', '')
 	vGender = request.GET.get('gender', '')
 	if vGender=='male' or vGender == 'female':
-		user_list = m_usernames.objects.filter(gender=vGender, first_name__contains=vFirstName , last_name__contains=vLastName, username__contains=vUsername)[0:100]
+		user_list = m_usernames.objects.filter(gender=vGender, first_name__contains=vFirstName , last_name__contains=vLastName, username__contains=vUsername)[0:50]
 	else:
-		user_list = m_usernames.objects.filter(first_name__contains=vFirstName , last_name__contains=vLastName, username__contains=vUsername)[0:100]
+		user_list = m_usernames.objects.filter(first_name__contains=vFirstName , last_name__contains=vLastName, username__contains=vUsername)[0:50]
 	qs_json = serializers.serialize('json', user_list)
 	return HttpResponse(qs_json, content_type='application/json')
 
