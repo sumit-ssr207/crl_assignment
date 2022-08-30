@@ -1,0 +1,149 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>User Listing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body>
+{% include "navbar.html" %}
+
+<div class="container">
+	<h2>Search Users</h2>
+
+
+
+
+  <form method="get">
+    <div class="well">
+      <h4 style="margin-top: 0">Filter</h4>
+      <div class="row">
+        <div class="form-group col-sm-4 col-md-3">
+
+          <label for="Username"> User_id </label>
+          <input type="text" class="form-control" name="username" id="username" aria-describedby="" placeholder="Username Contains...">
+   
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="first_name"> First Name </label>
+          <input type="text" class="form-control" name="first_name" id="first_name" aria-describedby="" placeholder="First Name Contains...">
+   
+
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+          <label for="last_name"> Last Name </label>
+          <input type="text" class="form-control" name="last_name" id="last_name" aria-describedby="" placeholder="Last Name Contains...">
+   
+
+        </div>
+        <div class="form-group col-sm-4 col-md-3">
+    
+
+
+        <label for="gender1" class="col-sm-3 control-label">Gender</label>
+        <div class="col-sm-6">
+        <select class="form-control" id="gender" onchange="get_filtered_data()" >
+          <option>any</option>
+          <option>male</option>
+          <option>female</option>
+        </select>          
+          
+        </div>
+       
+
+
+        </div>
+
+
+      </div>
+       <button class="btn btn-secondary" onClick="window.location.reload();" type="submit">Reset Inputs</button>
+
+    </div>
+  </form>
+
+
+  <table name="data_table" id="data_table" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User_id</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>Gender</th>
+      </tr>
+    </thead>
+    <tbody>
+
+    </tbody>
+  </table>
+
+<script>
+
+  var input = document.getElementById("first_name");
+   input.addEventListener("keyup", function (e) {
+      get_filtered_data();
+  });
+   document.getElementById("last_name").addEventListener("keyup", function (e) {
+      get_filtered_data();
+  });
+     document.getElementById("username").addEventListener("keyup", function (e) {
+      get_filtered_data();
+  });
+       
+
+function get_filtered_data(){
+  var e = document.getElementById("gender");  
+  var selected_value = e.options[e.selectedIndex].value;
+  url = 'get_filtered_data_api?first_name='+document.getElementById("first_name").value+'&last_name='+document.getElementById("last_name").value+'&username='+document.getElementById("username").value+'&gender='+selected_value
+  console.log(url)
+  fetch(url).then(function(response) {
+  return response.json();
+}).then(function(data) {
+  console.log(data);
+  h = '<thead><tr><th>User_id</th><th>First name</th><th>Last name</th><th>Gender</th></tr></thead>'
+  var r = new Array(), j = -1;
+ for (var key=0, size=data.length; key<size; key++){
+     r[++j] ='<tr><td>';
+     r[++j] = data[key]['pk'];
+     r[++j] = '</td><td>';
+     r[++j] = data[key]['fields']['first_name'];
+     r[++j] = '</td><td>';
+     r[++j] = data[key]['fields']['last_name'];
+     r[++j] = '</td><td>';
+     r[++j] = data[key]['fields']['gender'];
+     r[++j] = '</td></tr>';
+ }
+ $("#data_table").find('tbody').html("");
+ $('#data_table').find('tbody').append(r.join(''));
+
+
+}).catch(function() {
+  console.log("fail");
+});
+}
+
+
+
+</script>
+
+	</div>
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> 
+
+
+ 
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
