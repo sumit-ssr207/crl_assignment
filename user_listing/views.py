@@ -61,7 +61,7 @@ def all_user_list_screen(request):
 	except EmptyPage:
 		users = paginator.page(paginator.num_pages)
 
-	return render(request, 'user_list.html', { 'users': users,'pagerecords':pagerecords, 'total_users':paginator.count})
+	return render(request, 'user_list_screen.html', { 'users': users,'pagerecords':pagerecords, 'total_users':paginator.count})
 
 
 def fetch_random_data_screen(request):
@@ -125,6 +125,11 @@ def fetch_random_data_api(request):
 def search_users_screen(request):
 	user_list = m_usernames.objects.all()[:10]
 	return render(request, 'search_users_screen.html', {'user_list' : user_list})
+
+def user_info_view(request, username):
+    incident = get_object_or_404(models.Inc, inc_number=inc_number)
+    short_description = incident.short_description
+    return render(request, "incident.html", locals())
 
 
 
