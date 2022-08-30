@@ -109,7 +109,6 @@ function get_filtered_data(){
   return response.json();
 }).then(function(data) {
   console.log(data);
-  h = '<thead><tr><th>User_id</th><th>First name</th><th>Last name</th><th>Gender</th></tr></thead>'
   var r = new Array(), j = -1;
  for (var key=0, size=data.length; key<size; key++){
      r[++j] ='<tr><td>';
