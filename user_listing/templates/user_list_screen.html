@@ -46,24 +46,28 @@
                             <div class="col-lg-4 mb-4 mb-lg-0">
                                 <img id="m_picture_src" src="" alt="...">
                             </div>
-                            <div class="col-lg-6 px-xl-10">
+                            <div class="col-lg-8 px-xl-10">
                                 <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
                                     <h3 id="m_full_name" class="h3 text-white mb-0">Name</h3>
                                     <span id="m_id" class="text-primary">ID</span>
                                 </div>
                                 <ul class="list-unstyled mb-1-9">
                                     <li id="m_gender" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Gender:</span> vGender</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Experience:</span> 10 Years</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> edith@mail.com</li>
-                                    <li class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Website:</span> www.example.com</li>
-                                    <li class="display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone:</span> 507 - 541 - 4567</li>
+                                    <li id="m_email" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Email:</span> vEmail</li>
+                                    <li id="m_phone_cell"class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Phone_Cell:</span> vPhonoeCell</li>
+                                    <li id="m_dob_nat" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Dob_Nat:</span> vDOBnat</li>
                                 </ul>
-                                <ul class="social-icon-style1 list-unstyled mb-0 ps-0">
-                                    <li><a href="#!"><i class="ti-twitter-alt"></i></a></li>
-                                    <li><a href="#!"><i class="ti-facebook"></i></a></li>
-                                    <li><a href="#!"><i class="ti-pinterest"></i></a></li>
-                                    <li><a href="#!"><i class="ti-instagram"></i></a></li>
+                                  <div class="bg-secondary d-lg-inline-block py-1-9 px-1-9 px-sm-6 mb-1-9 rounded">
+                                    <span id="m_id" class="text-dark"><b>Location</b></span>
+                                    <ul class="list-unstyled mb-1-9">
+                                    <li id="m_city" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">City:</span> vCity</li>
+                                    <li id="m_state" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">State:</span> vState</li>
+                                    <li id="m_country"class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Country:</span> vCountry</li>
+                                    <li id="m_postcode" class="mb-2 mb-xl-3 display-28"><span class="display-26 text-secondary me-2 font-weight-600">Postcode:</span> vPostcode</li>
                                 </ul>
+
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -92,10 +96,19 @@ function get_user_info(userid){
 }).then(function(data) {
   console.log(data['first_name']);
 
-document.getElementById("m_full_name").innerHTML = data['first_name'] + data['last_name']
+document.getElementById("m_full_name").innerHTML = data['first_name'] +" "+ data['last_name']
 document.getElementById("m_id").innerHTML = "ID: "+data['username']
 document.getElementById("m_picture_src").src=data['picture']
 document.getElementById("m_gender").innerHTML = "Gender: "+data['gender'].charAt(0).toUpperCase() + data['gender'].slice(1);
+document.getElementById("m_email").innerHTML = "Email: "+data['email']
+document.getElementById("m_phone_cell").innerHTML = "Phone: "+data['phone'] + " " + "Cell: "+data['cell']
+document.getElementById("m_dob_nat").innerHTML = "DOB: "+data['dob'].slice(0,10) + " " + "Nat: "+data['nat']
+
+document.getElementById("m_city").innerHTML = "City: "+data['location_city']
+document.getElementById("m_state").innerHTML = "State: "+data['location_state']
+document.getElementById("m_country").innerHTML = "Country: "+data['location_country']
+document.getElementById("m_postcode").innerHTML = "Postcode: "+data['location_postcode']
+
 
 
 
