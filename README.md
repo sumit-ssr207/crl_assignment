@@ -31,7 +31,10 @@ If you don't have django installed for python 3 then run:
 
     $ pip3 install django
     
+Install required library:
 
+    $ pip3 install python-decouple
+    
 
 # Getting Started
 

@@ -105,12 +105,12 @@ def all_user_list_api(request):
 
 
 def fetch_random_data_screen(request):
-	user_list = m_usernames.objects.all()
+	user_list = m_usernames.objects.all().count()
 	toastMsg = ""
 	if 'toast' in request.session:
 		toastMsg = request.session['toast']
 	request.session['toast'] = ''
-	return render(request, 'fetch_data.html', {'current_records':len(user_list),'toastMsg':toastMsg})
+	return render(request, 'fetch_data.html', {'current_records':user_list,'toastMsg':toastMsg})
 
 def clear_database_api(request):
 	user_list = m_usernames.objects.all()
@@ -167,7 +167,7 @@ def fetch_random_data_api(request):
 	
 def search_users_screen(request):
 	user_list = m_usernames.objects.all()[:10]
-	total_users = len(m_usernames.objects.all())
+	total_users = m_usernames.objects.all().count()
 	return render(request, 'search_users_screen.html', {'user_list' : user_list,'total_users':total_users})
 
 
@@ -176,7 +176,7 @@ def fetch_large_random_data_for_load_test(request):
 	vMsg = ""
 	inputUserCount=500000
 	print("inputUserCount"+str(inputUserCount))
-	while len(m_usernames.objects.all()) < inputUserCount:
+	while m_usernames.objects.all().count() < inputUserCount:
 		time.sleep(240)
 		try:
 			response_raw = requests.get('https://randomuser.me/api/?results='+str(5000)) # Getting data from randomuser.me
@@ -204,7 +204,7 @@ def fetch_large_random_data_for_load_test(request):
 				user.save()
 				details.save()
 			print(str(len(response['results']))+" Users fetched and saved successfully!")
-			print("Total Users : "+str(len(m_usernames.objects.all())))
+			print("Total Users : "+str(m_usernames.objects.all().count()))
 		except:
 			print("Error in randomuser.me api data")
 			print(response_raw.text)
