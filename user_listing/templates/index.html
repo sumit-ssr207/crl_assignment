@@ -1,0 +1,86 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <title>User Listing</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Bootstrap -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+</head>
+<body>
+{% include "navbar.html" %}
+
+<div class="container">
+	<h2>Welcome !</h2>
+  <br/>
+  <h3>Assignment Statement</h3>
+
+<div class="bd-example-snippet bd-code-snippet">
+  <div class="d-flex align-items-center highlight-toolbar bg-light ps-3 pe-2 py-1">
+        <small class="font-monospace text-muted text-uppercase"></small>
+
+      </div><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-html" data-lang="html"><span class="line">
+USER LISTING :
+Develop an application in Python using Django Framework which will consume
+https://randomuser.me APIs and store data in the database. Once you store data in the database,
+expose API’s where you are able to fetch a list via pagination for the list of users available.
+
+GOALS
+1. Initiate a Project
+2. Setting up an API which will get User Details from the API and store in the database.
+Preferably relational database.
+3. Store the details in database
+4. Implement and expose an API which will get the data in a paginated manner
+5. Implement and expose an api which search users by name / id / gender in database
+6. Once you click on a user detail, show the entire information related to that user in an
+inner navigation
+7. Please note that the pagination / search & filter api needs to be done in your project
+instead of the randomuser api.
+8. Bonus : Additional consideration for optimizing for Performance for a large set of records.
+
+SPECIFICATIONS
+1. Complete this assignment in 1 week
+2. You can refer to https://randomuser.me/documentation for documentation.
+3. Use the git version control. Once your assignment is completed please share the
+standard zip / tar of your source code including the all the git meta.
+4. You can use any JavaScript framework to complete the front end related tasks.
+5. Your assignment should also include the README.md with instructions to install and setup
+DB if any
+      </span></code></pre></div></div>
+
+
+
+
+
+
+
+
+	
+
+</div>
+
+<script>
+  $(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#home").addClass("active");
+});
+</script>
+
+
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> 
+
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</body>
+</html>
+
+

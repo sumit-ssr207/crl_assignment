@@ -16,8 +16,7 @@ from django.http import HttpResponse
 
 pagerecords = 10
 
-def index(request):
-	return HttpResponse(" Welcome !")
+
 
 def get_filtered_data_api(request):
 	vUsername = request.GET.get('username', '')
@@ -195,6 +194,19 @@ def fetch_large_random_data_for_load_test(request):
 
 			continue
 	return HttpResponse(" Done !")
+
+def index(request):
+	return render(request, 'index.html')
+
+def api_screen(request):
+	return render(request, 'api_screen.html')
+
+def performance_screen(request):
+	return render(request, 'performance_screen.html')
+
+
+
+
 
 
 

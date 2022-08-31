@@ -1,15 +1,20 @@
   <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">CRL Assignment</a>
+      <a class="navbar-brand" href="/user_listing">CRL Assignment</a>
     </div>
     <ul class="nav navbar-nav">
-      <li><a href="fetch_random_data_screen">Fetch Data</a></li>
-      <li><a href="all_user_list">List All Users</a></li>
-      <li><a href="search_users_screen">Search Users</a></li>
-      <li></li>
-      <li><a href="fetch_random_data_screen">APIs</a></li>
-      <li><a href="all_user_list">Performance Analysis</a></li>
+      <li id ="home" ><a href="/user_listing">Home</a></li>
+      <li id ="fetch_random_data_screen"><a href="fetch_random_data_screen">Fetch Data</a></li>
+      <li id ="all_user_list"> <a href="all_user_list">List All Users</a></li>
+      <li id ="search_users_screen"><a href="search_users_screen">Search Users</a></li>
+      <li id ="api_screen"><a href="api_screen">APIs</a></li>
+      <li id ="performance_screen"><a href="performance_screen">Performance Analysis</a></li>
     </ul>
   </div>
 </nav>
+
+
+{% block content %}
+
+{% endblock %}

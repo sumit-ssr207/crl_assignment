@@ -66,6 +66,7 @@
 
   	{% endif %}
 
+
 </script>
 
 </div>
@@ -77,7 +78,12 @@
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
   <script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script> 
-
+<script type="text/javascript">
+$(document).ready(function(){
+   $(".active").removeClass("active");
+   $("#fetch_random_data_screen").addClass("active");
+});
+</script>
 
  
   <!-- Latest compiled and minified JavaScript -->
