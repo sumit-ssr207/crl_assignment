@@ -5,7 +5,7 @@ The goal of this project is to implement a user listing solution in Django.
 Assingment statement is included on homepage.
 
 
-![test](https://user-images.githubusercontent.com/112490857/187714695-bfa4258e-517a-481a-a89d-f64f874bf860.gif)
+![test](https://user-images.githubusercontent.com/112490857/187637501-4fad4bae-b6f8-4fb1-bdd3-e09a06fed2f1.gif)
 
 
 ### Main features

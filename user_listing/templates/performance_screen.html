@@ -22,11 +22,80 @@
 	<h2>Performance Analysis</h2>
   <br/>
 
-	
+<h3>Approach</h3>  
+<ul>
+  <li>Response time was considered for following APIs : 
+    <ul>
+      <li>Listing all users (Paginated Response)</li>
+      <li>Searching users in entire database</li>
+    </ul>
+     <li>Performance was tested on Local laptop as well as AWS cloud </li>
+    <li>Number of recordsets considered for analysis: (reason for not considering more records is mentioned in below section) </li>
+  <div class="row col-sm-3">
+    <div class="col-sm-8" style="background-color:lavender;">5000 -> 5k</div>
+    <div class="col-sm-8" style="background-color:lavenderblush;">47742 -> ~50k</div>
+    <div class="col-sm-8" style="background-color:lavender;">95434 -> ~1L</div>
+    <div class="col-sm-8" style="background-color:lavenderblush;">205986 -> ~2L</div>
+    <div class="col-sm-8" style="background-color:lavender;">267053 -> ~2.7L</div>
+  </div>
+</ul>
+
 
 </div>
 
+<ul></ul>
+<div class="container">
 
+<h4>Sample Case</h4>  
+
+{% load static %}
+<img class="img-responsive" alt="Responsive image" width="70%" height="240" src="{% static 'aws_search_2.7L.png' %}">
+<ul></ul>
+ <a class="btn btn-primary" href="{% static 'performance_screenshots.pdf' %}" download="performance_screenshots.pdf">Download screenshots of all tests</a>
+</div>
+<div class="container">
+
+<h3>Results</h3>  
+
+<p>It took listing_user API 16ms, 45ms, 60ms, 88ms, 112ms time to load on localhost and 35ms, 58ms, 115ms, 124ms,  157ms time to load on AWS for 5k, 50k, 1L,  2L,  2.7L records respectively.</p>
+<p>Similarly it took user_search API 10ms, 12ms,  9ms, 10ms,  12ms time to load on localhost and 34ms, 28ms,  56ms,  38ms,  35ms time to load on AWS for 5k, 50k, 1L,  2L,  2.7L records respectively.</p>
+
+<img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'localhost.png' %}">
+<img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'aws.png' %}">
+
+<h3>Points to consider</h3>  
+<ul>
+  
+  <li>SQLlite database is used for this assignment, It is a lightweight database and not suitable for large data. MySql or Postgres should improve performance significantly</li>
+   <li>AWS server used is of lowest configuration with 512mb RAM </li>
+    <li>Developmental Django webserver is used instead of any other production suitable server</li>
+     <li>Plain javascript has been used instead of any js framework</li>
+      <li>Load test was performed by single user only</li>
+       <li>randomuser.me website temporarily suspends IP if large data is requested frequently<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'rm_error.png' %}"></p></li>
+        <li>Repeated requests even after intervals raise cloudflare issue<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'cf_error.png' %}"></p></li>
+
+
+
+
+</ul>
+
+<h3>Conclusion</h3>  
+<ul>
+  <li>At no point of time server responded with huge data irrespective of actual records present in the database, This helped in reducing user bandwidth and minimizing client side browser rendering delays.</li>
+  <li>Realtime user search while typing remained fluid, very responsive even for significant sized data </li>
+  <li>Performance can be further increased by </li>
+  <ul>
+    <li>    - Using scalable / in memory databases like Redis etc. </li>
+    <li>    - Increasing physical configuration of server</li>
+    <li>    - Using production suitable webservers like Gunicorn etc. </li>
+  </ul>
+
+</ul>
+
+
+</div>
+
+<hr/>
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
