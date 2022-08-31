@@ -6,6 +6,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('all_user_list', login_required(views.all_user_list_screen), name='all_user_list_screen'),
+    path('all_user_list_api', login_required(views.all_user_list_api), name='all_user_list_api'),
     path('fetch_random_data_api', login_required(views.fetch_random_data_api), name='fetch_random_data_api'),
     path('fetch_random_data_screen', login_required(views.fetch_random_data_screen), name='fetch_random_data_screen'),
     path('clear_database_api', login_required(views.clear_database_api), name='clear_database_api'),
@@ -16,7 +17,4 @@ urlpatterns = [
     path('api_screen', login_required(views.api_screen), name='api_screen'),
     path('performance_screen', login_required(views.performance_screen), name='performance_screen'),
     
-    
-
-
 ]
