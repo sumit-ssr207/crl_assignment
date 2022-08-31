@@ -31,15 +31,6 @@ If you don't have django installed for python 3 then run:
 
     $ pip3 install django
     
-And then:
-
-    $ python3 -m django startproject \
-      --template=https://github.com/nikola-k/django-template/zipball/master \
-      --extension=py,md \
-      <project_name>
-      
-      
-After that just run migrations, and start the server.
 
 
 # Getting Started
