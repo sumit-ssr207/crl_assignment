@@ -49,3 +49,8 @@ Then simply apply the migrations:
 You can now run the development server:
 
     $ python manage.py runserver
+    
+Server will display URL to connect to:
+
+<img width="547" alt="Screenshot 2022-08-31 at 1 57 38 PM" src="https://user-images.githubusercontent.com/112490857/187632841-36c89a9e-9a79-40cd-8d46-2fead665b5b0.png">
+
