@@ -20,6 +20,8 @@
 
   <div class="container">
     <h2>User List</h2>
+    <h5>Displaying user list with adjustable pagination</h5>
+      <br/>
 
 
 
@@ -150,13 +152,13 @@ document.getElementById("m_postcode").innerHTML = "Postcode: "+data['location_po
     {{  pagerecords }} Records / Page - [Change]
   </button>
   <div class="dropdown-menu" aria-labelledby="Records">
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=5">5</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=10">10</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=20">20</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=50">50</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=100">100</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=500">500</a>
-    <a class="dropdown-item" href="/user_listing/all_user_list_screen?pagerecords=1000">1000</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=5">5</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=10">10</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=20">20</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=50">50</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=100">100</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=500">500</a>
+    <a class="dropdown-item" href="/user_listing/all_user_list?pagerecords=1000">1000</a>
   </div>
    Total Users : {{total_users}}
 </div>
