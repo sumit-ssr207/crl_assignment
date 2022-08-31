@@ -13,10 +13,7 @@ import time
 # Create your views here.
 
 from django.http import HttpResponse
-
 pagerecords = 10
-
-
 
 def get_filtered_data_api(request):
 	vUsername = request.GET.get('username', '')
@@ -132,7 +129,9 @@ def fetch_random_data_api(request):
 		if int(inputUserCount)>5000:
 			inputUserCount = str(5000)
 	try:
-		response = requests.get('https://randomuser.me/api/?results='+inputUserCount).json()  # Getting data from randomuser.me
+		print(inputUserCount)
+		response_raw = requests.get('https://randomuser.me/api/?results='+inputUserCount)
+		response = response_raw.json()  # Getting data from randomuser.me
 		for record in response['results']:
 			vFirst_name = record['name']['first']
 			vLast_name = record['name']['last']
@@ -152,12 +151,14 @@ def fetch_random_data_api(request):
 			picture = record['picture']['large']
 			nat = record['nat']
 			user = m_usernames(username = vUsername,first_name=vFirst_name,last_name=vLast_name,gender=gender,id_type = id_type,id_value=id_value)
-			details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,location_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
+			details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,loation_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
 			user.save()
 			details.save()
 		vMsg = str(len(response['results']))+" Users fetched and saved successfully!"
-	except:
+	except Exception as e:
 		vMsg = "Error in randomuser.me api data"
+		print(e)
+		print(response_raw.text)
 
 
 	request.session['toast'] = vMsg
@@ -199,7 +200,7 @@ def fetch_large_random_data_for_load_test(request):
 				picture = record['picture']['large']
 				nat = record['nat']
 				user = m_usernames(username = vUsername,first_name=vFirst_name,last_name=vLast_name,gender=gender,id_type = id_type,id_value=id_value)
-				details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,location_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
+				details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,loation_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
 				user.save()
 				details.save()
 			print(str(len(response['results']))+" Users fetched and saved successfully!")

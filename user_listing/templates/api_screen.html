@@ -22,10 +22,114 @@
 	<h2>APIs</h2>
   <br/>
 
+<h3>Base URL</h3>
+<span>The BASE URL is the common url used as prefix for all API call.</span>
+<code><span class="p">[Base URL] : http://127.0.0.1:8000</span></code>
+<hr/>
 
+<h3>Get userlist with pagination</h3>
+<span>This call can be used to get userlist in pagination manner</span>
+<code><span class="p">GET : /user_listing/all_user_list_api</span></code>
+<div class="space"></div>
+<figure class="highlight"><pre><code>
+curl '[Base_Url]/user_listing/all_user_list_api?page=3&records=10' \
+-X 'GET' \
+-H 'Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+-H 'Upgrade-Insecure-Requests: 1' \
+-H 'Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Connection: keep-alive'
+
+</code></pre></figure>
+<table class="table  table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Input Parameter</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>page</td>
+          <td>int</td>
+          <td>Page Number. If not provided, default will be 1</td>
+        </tr>
+        <tr>
+          <td>records</td>
+          <td>int</td>
+          <td>Number of records per page. If not provided, default will be 1000</td>
+        </tr>
+
+      </tbody>
+    </table>
+<span><b>Sample Response</b></span>
+    <figure class="highlight"><pre><code>[{"model": "user_listing.m_usernames", "pk": "purplemeercat334", "fields": {"first_name": "Lance", "last_name": "Black", "gender": "male", "id_type": "SSN", "id_value": "590-79-1247"}}, {"model": "user_listing.m_usernames", "pk": "redcat453", "fields": {"first_name": "Giray", "last_name": "Kutlay", "gender": "male", "id_type": "", "id_value": null}}, {"model": "user_listing.m_usernames", "pk": "heavybutterfly438", "fields": {"first_name": "Diego", "last_name": "Ferrer", "gender": "male", "id_type": "DNI", "id_value": "39203387-A"}}, {"model": "user_listing.m_usernames", "pk": "bigbutterfly328", "fields": {"first_name": "Marie", "last_name": "Huus", "gender": "female", "id_type": "FN", "id_value": "03086543019"}}, {"model": "user_listing.m_usernames", "pk": "organiczebra589", "fields": {"first_name": "William", "last_name": "Thomsen", "gender": "male", "id_type": "CPR", "id_value": "220678-6411"}}, {"model": "user_listing.m_usernames", "pk": "sadbutterfly937", "fields": {"first_name": "مریم", "last_name": "کریمی", "gender": "female", "id_type": "", "id_value": null}}, {"model": "user_listing.m_usernames", "pk": "crazybird452", "fields": {"first_name": "Mandy", "last_name": "Rohrer", "gender": "female", "id_type": "SVNR", "id_value": "67 190652 R 728"}}, {"model": "user_listing.m_usernames", "pk": "heavygorilla570", "fields": {"first_name": "Eden", "last_name": "Martin", "gender": "female", "id_type": "", "id_value": null}}, {"model": "user_listing.m_usernames", "pk": "orangeladybug165", "fields": {"first_name": "Luciene", "last_name": "Aragão", "gender": "female", "id_type": "CPF", "id_value": "579.545.465-15"}}, {"model": "user_listing.m_usernames", "pk": "ticklishostrich504", "fields": {"first_name": "احسان", "last_name": "مرادی", "gender": "male", "id_type": "", "id_value": null}}]</code></pre></figure>
+
+<hr/>
+
+<h3>Search users by input parameters</h3>
+<span>This call can be used to get matching users based on input parameters.</span>
+<code><span class="p">GET : /user_listing/get_filtered_data_api</span></code>
+<div class="space"></div>
+<figure class="highlight"><pre><code>curl '[Base_Url]/user_listing/get_filtered_data_api?first_name=a&last_name=&username=&gender=any' \
+-X 'GET' \
+-H 'Accept: */*' \
+-H 'Accept-Encoding: gzip, deflate' \
+-H 'Accept-Language: en-IN,en-GB;q=0.9,en;q=0.8' \
+-H 'Connection: keep-alive'
+</code></pre></figure>
+<table class="table  table-bordered table-striped">
+      <thead>
+        <tr>
+          <th>Input Parameter</th>
+          <th>Type</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>first_name</td>
+          <td>String</td>
+          <td>First Name</td>
+        </tr>
+        <tr>
+          <td>last_name</td>
+          <td>String</td>
+          <td>Last Name</td>
+        </tr>
+        <tr>
+          <td>username</td>
+          <td>String</td>
+          <td>Userid</td>
+        </tr>
+        <tr>
+          <td>gender</td>
+          <td>String</td>
+          <td>Gender</td>
+        </tr>
+      </tbody>
+    </table>
+<span><b>Sample Response</b></span>
+    <figure class="highlight"><pre><code>[{
+    "model": "user_listing.m_usernames",
+    "pk": "tinypeacock985",
+    "fields": {
+        "first_name": "Gabrielle",
+        "last_name": "Fortin",
+        "gender": "female",
+        "id_type": "SIN",
+        "id_value": "574234951"
+    }
+}]</code></pre></figure>
+
+<hr/>
+
+<h4>Note</h4>
+
+<span>APIs have been secured with Django authentication. If it needs to be accessed from third party apps then JWT token based mechanism can be implemented.</span>
+<hr/>
 </div>
-
-
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
