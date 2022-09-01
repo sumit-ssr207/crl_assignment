@@ -1,5 +1,7 @@
 # CRL Assignment
 
+This assignment is deployed on AWS. URL is shared in the email.
+
 The goal of this project is to implement a user listing solution in Django. 
 
 Assingment statement is included on homepage.
