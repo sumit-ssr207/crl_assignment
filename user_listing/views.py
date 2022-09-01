@@ -11,10 +11,6 @@ from itertools import chain
 import time
 from time import strftime
 from django.db import transaction
-
-
-# Create your views here.
-
 from django.http import HttpResponse
 pagerecords = 10
 
@@ -30,38 +26,10 @@ def get_filtered_data_api(request):
 	qs_json = serializers.serialize('json', user_list)
 	return HttpResponse(qs_json, content_type='application/json')
 
-def single_user_info(request,userid):
-	result = {}
-	qs = m_usernames.objects.filter(username=userid)
-	for item in qs:
-		result['first_name'] = item.first_name
-		result['last_name'] = item.last_name
-		result['username'] = item.username 
-		result['gender'] = item.gender
-		result['id_type'] = item.id_type
-		result['id_value'] = item.id_value
-	qs = m_userdetails.objects.filter(username=userid)
-	for item in qs:
-		result['email'] = item.email
-		result['location_city'] = item.location_city
-		result['location_state'] = item.location_state
-		result['location_country'] = item.loation_country
-		result['location_postcode'] = item.location_postcode
-		result['dob'] = item.dob
-		result['registered_date'] = item.registered_date
-		result['phone'] = item.phone
-		result['cell'] = item.cell
-		result['picture'] = item.picture
-		result['nat'] = item.nat
-	return HttpResponse(json.dumps(result), content_type='application/json')
-
-
-
 def all_user_list_screen(request):
 	global pagerecords
 	user_list = m_usernames.objects.all()
 	page = request.GET.get('page', 1)
-	
 	if request.GET.get('pagerecords') == "5":
 		pagerecords = 5
 	elif request.GET.get('pagerecords') == "10":
@@ -76,9 +44,7 @@ def all_user_list_screen(request):
 		pagerecords = 500
 	elif request.GET.get('pagerecords') == "1000":
 		pagerecords = 1000
-
 	print("pagerecords "+str(pagerecords))
-
 	paginator = Paginator(user_list, pagerecords)
 	try:
 		users = paginator.page(page)
@@ -86,7 +52,6 @@ def all_user_list_screen(request):
  		users = paginator.page(1)
 	except EmptyPage:
 		users = paginator.page(paginator.num_pages)
-
 	return render(request, 'user_list_screen.html', { 'users': users,'pagerecords':pagerecords, 'total_users':paginator.count})
 
 def all_user_list_api(request):
@@ -106,7 +71,6 @@ def all_user_list_api(request):
 		users = paginator.page(paginator.num_pages)
 	return HttpResponse(serializers.serialize('json', users))
 
-
 def fetch_random_data_screen(request):
 	user_list = m_usernames.objects.all().count()
 	toastMsg = ""
@@ -120,8 +84,6 @@ def clear_database_api(request):
 	user_list.delete()
 	request.session['toast'] = "All records deleted successfully!"
 	return redirect('fetch_random_data_screen')
-
-
 
 def fetch_random_data_api(request):
 	vMsg = ""
@@ -161,18 +123,17 @@ def fetch_random_data_api(request):
 			bulk_user_records.append(user)
 			details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,loation_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
 			bulk_details_records.append(details)
+		
 		with transaction.atomic():
 			m_usernames.objects.bulk_create(bulk_user_records, ignore_conflicts=True)
 			m_userdetails.objects.bulk_create(bulk_details_records, ignore_conflicts=True)
+
 		print(strftime("%H%M%S")+" Saved ")
 		vMsg = str(len(response['results']))+" Users fetched and saved successfully!"
 	except Exception as e:
 		vMsg = "Error in randomuser.me api data"
 		print(e)
-
-
 	request.session['toast'] = vMsg
-
 	return redirect('fetch_random_data_screen')
 	
 def search_users_screen(request):
@@ -180,7 +141,30 @@ def search_users_screen(request):
 	total_users = m_usernames.objects.all().count()
 	return render(request, 'search_users_screen.html', {'user_list' : user_list,'total_users':total_users})
 
-
+def single_user_info(request,userid):
+	result = {}
+	qs = m_usernames.objects.filter(username=userid)
+	for item in qs:
+		result['first_name'] = item.first_name
+		result['last_name'] = item.last_name
+		result['username'] = item.username 
+		result['gender'] = item.gender
+		result['id_type'] = item.id_type
+		result['id_value'] = item.id_value
+	qs = m_userdetails.objects.filter(username=userid)
+	for item in qs:
+		result['email'] = item.email
+		result['location_city'] = item.location_city
+		result['location_state'] = item.location_state
+		result['location_country'] = item.loation_country
+		result['location_postcode'] = item.location_postcode
+		result['dob'] = item.dob
+		result['registered_date'] = item.registered_date
+		result['phone'] = item.phone
+		result['cell'] = item.cell
+		result['picture'] = item.picture
+		result['nat'] = item.nat
+	return HttpResponse(json.dumps(result), content_type='application/json')
 
 def fetch_large_random_data_for_load_test(request):
 	vMsg = ""
@@ -215,14 +199,15 @@ def fetch_large_random_data_for_load_test(request):
 				bulk_user_records.append(user)
 				details = m_userdetails(email= vEmail,username = user, location_city=location_city,location_state=location_state,loation_country=loation_country,location_postcode=location_postcode,dob=dob,registered_date=registered_date,phone=phone,cell=cell,picture=picture,nat=nat)
 				bulk_details_records.append(details)
+
 			with transaction.atomic():
 				m_usernames.objects.bulk_create(bulk_user_records, ignore_conflicts=True)
 				m_userdetails.objects.bulk_create(bulk_details_records, ignore_conflicts=True)
+
 			print("Total Users : "+str(m_usernames.objects.all().count()))
 		except:
 			print("Error in randomuser.me api data")
 			print(response_raw.text)
-
 			continue
 	return HttpResponse(" Done !")
 
