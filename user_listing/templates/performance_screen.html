@@ -30,7 +30,7 @@
       <li>Searching users in entire database</li>
     </ul>
      <li>Performance was tested on Local laptop as well as AWS cloud </li>
-    <li>Number of recordsets considered for analysis: (reason for not considering more records is mentioned in below section) </li>
+    <li>Recordsets considered for analysis: (reason for not considering more records is mentioned in below section) </li>
   <div class="row col-sm-3">
     <div class="col-sm-8" style="background-color:lavender;">5000 -> 5k</div>
     <div class="col-sm-8" style="background-color:lavenderblush;">47742 -> ~50k</div>
@@ -71,8 +71,8 @@
     <li>Developmental Django webserver is used instead of any other production suitable server</li>
      <li>Plain javascript has been used instead of any js framework</li>
       <li>Load test was performed by single user only</li>
-       <li>randomuser.me website temporarily suspends IP if large data is requested frequently<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'rm_error.png' %}"></p></li>
-        <li>Repeated requests even after intervals raise cloudflare issue<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'cf_error.png' %}"></p></li>
+       <li>Measuring very large data performance was not possible as randomuser.me website temporarily suspends IP if large data is requested frequently<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'rm_error.png' %}"></p></li>
+        <li>Also cloudflare issue even when requests are timed at intervals<p><img class="img-responsive" alt="Responsive image" width="70%"  src="{% static 'cf_error.png' %}"></p></li>
 
 
 
