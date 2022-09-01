@@ -79,10 +79,19 @@
 
 </ul>
 
+<h3>Optimizations</h3>  
+<ul>
+  <li>Bulk insert approach is used with atomicity instead of saving single records</li>
+  <li>At no point in time server responds with huge data irrespective of actual records present in the database, This helped in reducing user bandwidth and minimizing client side browser rendering delays.</li>
+</ul>
+<hr/>
+
+
+
 <h3>Conclusion</h3>  
 <ul>
-  <li>At no point of time server responded with huge data irrespective of actual records present in the database, This helped in reducing user bandwidth and minimizing client side browser rendering delays.</li>
-  <li>Realtime user search while typing remained fluid, very responsive even for significant sized data </li>
+  <li>No bottlenecks were found for variouos sized data, response times were realistic</li>
+  <li>Realtime user search (while typing) remained fluid, very responsive even for significant sized data </li>
   <li>Performance can be further increased by </li>
   <ul>
     <li>    - Using scalable / in memory databases like Redis etc. </li>
@@ -91,11 +100,10 @@
   </ul>
 
 </ul>
-
-
+<hr/>
 </div>
 
-<hr/>
+
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
