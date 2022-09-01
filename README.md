@@ -4,7 +4,7 @@ This assignment is deployed on AWS. URL is shared in the email.
 
 The goal of this project is to implement a user listing solution in Django. 
 
-Assingment statement is included on homepage.
+Assignment statement is included on homepage.
 
 
 ![test](https://user-images.githubusercontent.com/112490857/187637501-4fad4bae-b6f8-4fb1-bdd3-e09a06fed2f1.gif)
